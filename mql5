@@ -1,0 +1,69 @@
+
+//+------------------------------------------------------------------+
+//|                                              Market MasterFx.mq5 |
+//|                         forexroboteasy.com - Forex Robot Easy Team |
+//|                                      Copyright © 2022, ForexRobot |
+//|                                                        Easy Team |
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Set leverage ratio to 1:500
+    MarginSetDeposit(500, 500);
+
+    // Set maximum number of trades per symbol
+    int maxTrades = 5;
+
+    // Set minimum required deposit for each 0.01 lot
+    double lotSize = 0.01;
+    double requiredDeposit = 500 * lotSize;
+
+    // Print necessary information to the Journal
+    Print('Market MasterFx Expert Advisor initialized.');
+    Print('Leverage ratio set to 1:500.');
+    Print('Maximum number of trades per symbol: ', maxTrades);
+    Print('Required deposit for each 0.01 lot: ', requiredDeposit);
+
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Check if current symbol is one of the specified symbols
+    string symbol = Symbol();
+    if (symbol == 'NZDCHF' || symbol == 'NZDCAD' || symbol == 'GBPCAD' || symbol == 'GBPAUD' ||
+        symbol == 'USDCNH' || symbol == 'GBPNZD' || symbol == 'NZDUSD' || symbol == 'NZDJPY' ||
+        symbol == 'CADCHF' || symbol == 'EURCAD' || symbol == 'EURNZD' || symbol == 'CHFJPY' ||
+        symbol == 'AUDJPY' || symbol == 'AUDCHF' || symbol == 'AUDCAD' || symbol == 'AUDNZD' ||
+        symbol == 'GBPJPY' || symbol == 'CADJPY' || symbol == 'GBPCHF' || symbol == 'EURJPY' ||
+        symbol == 'EURCHF' || symbol == 'EURAUD' || symbol == 'EURGBP' || symbol == 'AUDUSD' ||
+        symbol == 'USDCAD' || symbol == 'USDJPY' || symbol == 'EURUSD' || symbol == 'GBPUSD')
+    {
+        // Execute trading algorithm for the current symbol
+        ExecuteTradingAlgorithm(symbol);
+    }
+}
+
+//+------------------------------------------------------------------+
+//| Execute trading algorithm for the specified symbol               |
+//+------------------------------------------------------------------+
+void ExecuteTradingAlgorithm(string symbol)
+{
+    // Place trading logic here
+    Print('Trading algorithm executed for symbol: ', symbol);
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Print deinitialization message to the Journal
+    Print('Market MasterFx Expert Advisor deinitialized.');
+}
